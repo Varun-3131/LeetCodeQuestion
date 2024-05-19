@@ -24,5 +24,4 @@ public class LongestPalindrome public int longestPalindrome(String s) {
         length ++;
     }
     return length;
-}{
 }
