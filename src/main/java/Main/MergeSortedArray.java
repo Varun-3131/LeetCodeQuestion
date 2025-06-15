@@ -1,13 +1,27 @@
 package Main;
 
 public class MergeSortedArray {
-
-        public void merge(int[] nums1, int m, int[] nums2, int n) {
-            for (int j = 0, i = m; j < n; j++) {
-                nums1[i] = nums2[j];
-                i++;
+    public void merge(int[] A, int m, int[] B, int n) {
+        int idx=m+n-1;
+        int i=m-1;
+        int j=n-1;
+        while(i>=0 && j>=0){
+            if(A[i]>=B[j]){
+                A[idx]=A[i];
+                idx--;
+                i--;
+            }else{
+                A[idx]=B[j];
+                idx--;
+                j--;
             }
-            Arrays.sort(nums1);
         }
+        while(j>=0){
+            A[idx]=B[j];
+            idx--;
+            j--;
+        }
+
+    }
     }
 
