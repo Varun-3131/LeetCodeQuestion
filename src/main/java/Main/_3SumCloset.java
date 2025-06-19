@@ -1,4 +1,3 @@
-package Main;
 
 public class _3SumCloset {
     public int threeSumClosest(int[] nums, int target) {

@@ -1,26 +1,18 @@
-package Main;
 
 public class FindTheDuplicateNumber {
     public int findDuplicate(int[] nums) {
-        int slow = 0;
-        int fast = 0;
-
+        int slow = nums[0];
+        int fast = nums[0];
         do {
+            slow = nums[slow]; //Slow ++
+            fast = nums[nums[fast]]; //Fast=2
+        } while (slow != fast);
+        slow = nums[0];
+        while (slow != fast) {
             slow = nums[slow];
-            fast = nums[nums[fast]];
+            fast = nums[fast];
         }
-
-        while (slow != fast);
-
-        int slow2 = 0;
-
-        do {
-            slow = nums[slow];
-            slow2 = nums[slow2];
-        }
-
-        while (slow != slow2);
-
-        return slow2;
+        return slow;
     }
+}
 }
