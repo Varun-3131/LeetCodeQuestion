@@ -1,27 +1,32 @@
 package Main;
 
 public class ValidPalindrome {
-    public boolean isPalindrome(String s) {
-        if (s.isEmpty()) {
+    boolean isAlpha(char ch) {
+        if ((ch >= '0' && ch <= '9') || (Character.toLowerCase(ch) >= 'a' && Character.toLowerCase(ch) <= 'z')) {
             return true;
         }
-        int start = 0;
-        int last = s.length() - 1;
-        while (start <= last) {
-            char currFirst = s.charAt(start);
-            char currLast = s.charAt(last);
-            if (!Character.isLetterOrDigit(currFirst)) {
-                start++;
-            } else if (!Character.isLetterOrDigit(currLast)) {
-                last--;
-            } else {
-                if (Character.toLowerCase(currFirst) != Character.toLowerCase(currLast)) {
-                    return false;
-                }
-                start++;
-                last--;
+        return false;
+    }
+
+    public boolean isPalindrome(String s) {
+        int st = 0;
+        int end = s.length() - 1;
+        while (st <= end) {
+            if (!isAlpha(s.charAt(st))) { // NOT isAlpha
+                st++;
+                continue;
             }
+            if (!isAlpha(s.charAt(end))) { // NOT isAlpha
+                end--;
+                continue;
+            }
+            if (Character.toLowerCase(s.charAt(st)) != Character.toLowerCase(s.charAt(end))) {
+                return false;
+            }
+            st++;
+            end--;
         }
         return true;
     }
+
 }
