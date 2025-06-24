@@ -2,13 +2,18 @@ package Main;
 
 public class ReverseWordsInAString {
     public String reverseWords(String s) {
-        String[] words = s.split(" ");
+        // Split by spaces and filter out empty strings
+        String[] words = s.trim().split("\\s+");
+
+        // Reverse the array
         StringBuilder result = new StringBuilder();
         for (int i = words.length - 1; i >= 0; i--) {
-            if (!words[i].equals("")) {
-                result.append(words[i]).append(" ");
+            result.append(words[i]);
+            if (i > 0) {
+                result.append(" ");
             }
         }
-        return result.length() == 0 ? "" : result.substring(0, result.length() - 1);
+
+        return result.toString();
     }
 }
