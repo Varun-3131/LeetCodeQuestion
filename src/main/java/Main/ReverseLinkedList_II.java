@@ -2,52 +2,38 @@ package Main;
 
 public class ReverseLinkedList_II {
     public ListNode reverseBetween(ListNode head, int left, int right) {
-
-        if (head == null || head.next == null) {
+        if(head==null||head.next==null||left==right){
             return head;
         }
 
-        if (left > right || left == right) {
-            return head;
+        ListNode curr=head;
+        ListNode prev=null;
+        int i=1;
+        while(curr!=null && i!=left){
+            prev=curr;
+            curr=curr.next;
+            i++;
         }
 
-        ListNode l = head;
-        ListNode prevL = null;
-        ListNode r = head;
-        ListNode nextR = null;
-        int posL = 1;
-        int posR = 1;
+        ListNode pointerToStart=prev;
+        ListNode start=curr;
+        prev=null;
 
-        while (posL != left) {
-            prevL = l;
-            l = l.next;
-            posL++;
+        while(curr!=null&& i!=right+1){
+            ListNode next=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;
+            i++;
         }
 
-        while (posR != right) {
-            r = r.next;
-            posR++;
-        }
-
-        nextR = r.next;
-        r.next = null;
-        ListNode node = reverseList(l);
-        node.next = nextR;
-        if (prevL == null) {
-            head = r;
-        } else {
-            prevL.next = r;
+        start.next=curr;
+        if(pointerToStart!=null){
+            pointerToStart.next=prev;
+        }else{
+            return prev;
         }
         return head;
-    }
 
-    public ListNode reverseList(ListNode l) {
-        if (l.next == null) {
-            return l;
-        }
-        ListNode newNode = reverseList(l.next);
-        newNode.next = l;
-        l.next = null;
-        return l;
     }
 }
