@@ -1,54 +1,38 @@
 package Main;
 
 public class ImplementQueueUsingStacks {
-    Stack<Integer> primaryStack;
-    Stack<Integer> secondaryStack;
 
-
-    int peek;
+    Stack<Integer> s1 = new Stack<>();
+    Stack<Integer> s2 = new Stack<>();
 
     public MyQueue() {
-        primaryStack = new Stack<>();
-        secondaryStack = new Stack<>();
+
     }
 
     public void push(int x) {
-
-        if(primaryStack.isEmpty()) {
-            peek = x;
+        // Move all elements from s1 to s2
+        while (!s1.isEmpty()) {
+            s2.push(s1.pop());
         }
 
-        primaryStack.push(x);
+        // Push the new element onto s1
+        s1.push(x);
+
+        // Move everything back to s1
+        while (!s2.isEmpty()) {
+            s1.push(s2.pop());
+        }
     }
 
     public int pop() {
-
-        while(!primaryStack.isEmpty()){
-            secondaryStack.push(primaryStack.pop());
-        }
-
-
-        int popped = secondaryStack.pop();
-
-
-        if(!secondaryStack.isEmpty()) {
-            peek = secondaryStack.peek();
-        }
-
-
-        while(!secondaryStack.isEmpty()){
-            primaryStack.push(secondaryStack.pop());
-        }
-
-
-        return popped;
+        return s1.pop();
     }
 
     public int peek() {
-        return peek;
+        return s1.peek();
     }
 
     public boolean empty() {
-        return primaryStack.isEmpty();
+        return s1.isEmpty();
     }
 }
