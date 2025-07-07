@@ -1,34 +1,34 @@
 package Main;
 
 public class ImplementStackUsingQueues {
-    Deque<Integer> q;
+    Queue<Integer> q1 = new LinkedList<>();
+    Queue<Integer> q2 = new LinkedList<>();
+
     public MyStack() {
-        this.q = new ArrayDeque<>();
     }
 
     public void push(int x) {
-        this.q.addLast(x);
+        q2.offer(x);
+
+        while (!q1.isEmpty()) {
+            q2.offer(q1.poll());
+        }
+
+        Queue<Integer> temp = q1;
+        q1 = q2;
+        q2 = temp;
     }
 
     public int pop() {
-        int size = this.q.size();
-        for(int i = 0; i < size - 1; i++)
-            this.push(this.q.pollFirst());
-        return this.q.pollFirst();
+        return q1.poll();
     }
 
     public int top() {
-        int size = q.size();
-        for(int i = 0; i < size - 1; i++)
-            this.push(this.q.pollFirst());
-
-        int res = this.q.peekFirst();
-        this.push(this.q.pollFirst());
-        return res;
+        return q1.peek();
     }
 
     public boolean empty() {
-        return this.q.size() == 0;
+        return q1.isEmpty();
     }
 
 }
