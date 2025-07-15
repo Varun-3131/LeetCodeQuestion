@@ -2,19 +2,28 @@ package Main;
 
 public class GasStation {
     public int canCompleteCircuit(int[] gas, int[] cost) {
-        int sGas = 0, sCost = 0, res = 0, total = 0;
-        for (int i = 0; i < gas.length; i++) {
-            sGas += gas[i];
-            sCost += cost[i];
+        int totalGas=0;
+        int totalCost=0;
+
+        for(int i=0;i<gas.length;i++){
+            totalGas=totalGas +gas[i];
+            totalCost=totalCost+ cost[i];
         }
-        if (sGas < sCost) return -1;
-        for (int i = 0; i < gas.length; i++) {
-            total += gas[i] - cost[i];
-            if (total < 0) {
-                total = 0;
-                res = i + 1;
+        if(totalGas<totalCost){
+            return -1;
+        }
+
+        int currentGas=0;
+        int startingIndex=0;
+
+        for(int i=0;i<gas.length;i++){
+            currentGas+=gas[i]-cost[i];
+
+            if(currentGas<0){
+                startingIndex=i+1;
+                currentGas=0;
             }
         }
-        return res;
+        return startingIndex;
     }
 }
